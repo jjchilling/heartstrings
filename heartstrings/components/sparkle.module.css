@@ -1,0 +1,30 @@
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.sparkle {
+  width: 10px; 
+  height: 10px; 
+  background-color: #fff; /* Sparkle color */
+  border-radius: 5%; /* Slightly rounded corners for a more refined diamond shape */
+  position: absolute;
+  animation: sparkle 1s infinite ease-in-out;
+  /* Rotate the square to create a diamond */
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+.sparkling-background {
+  position: relative;
+  overflow: hidden;
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 2;
+}
