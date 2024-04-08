@@ -94,9 +94,11 @@ const Music = () => {
               Providence.
             </h2>
             <h2 className="text-2xl font-serif">
-              Single Time Machine will be released on April 28th, with album
-              HeartStrings releasing on May 10th!
+              My single Time Machine will be released on April 28th!
             </h2>
+            {/* <h2 className="text-2xl font-serif">
+              My album Time Machine will be released on April 28th!
+            </h2> */}
           </div>
         </div>
       </div>
