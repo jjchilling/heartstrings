@@ -77,6 +77,7 @@ const Music = () => {
         ></div>
       ))}
       <Navbar />
+      
       <div className="flex flex-col items-center justify-center">
         <div className="text-center">
           <h1 className="text-white text-5xl font-bold mt-4 md:mt-8 font-serif">

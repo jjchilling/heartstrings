@@ -154,7 +154,7 @@ export default function Heart() {
               cursor: "pointer",
             }}
           >
-            Go Home
+            Heart
           </button>
         </div>
         <div style={{ height: "50px" }}></div>
