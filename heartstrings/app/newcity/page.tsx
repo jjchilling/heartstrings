@@ -3,39 +3,55 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Heart() {
-  const router = useRouter(); // Initialize the useRouter hook
-
+  const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(true);
-  const [audio] = useState(() => {
+  // Initialize audio with undefined to ensure type safety
+  const [audio, setAudio] = useState<HTMLAudioElement | undefined>(undefined);
+
+  // Effect for initializing the audio object
+  useEffect(() => {
+    // Ensure Audio is defined (e.g., not during SSR)
     if (typeof Audio !== "undefined") {
       const newAudio = new Audio("/newcity-loop.wav");
       newAudio.loop = true; // Set audio to loop
-      return newAudio;
+      setAudio(newAudio); // Set the initialized audio object to state
     }
-    return undefined;
-  });
+  }, []);
 
+  // Effect for handling play/pause based on isPlaying state
   useEffect(() => {
-    // This function is called when the component mounts
-    // Start playing music automatically if needed or perform other initialization tasks
-
-    return () => {
-      audio.pause(); // Stop the music
-      audio.currentTime = 0; // Reset the play time to the start
-      setIsPlaying(false); // Reset play state
+    const togglePlayback = async () => {
+      if (audio) {
+        if (isPlaying) {
+          try {
+            await audio.play();
+          } catch (err) {
+            console.error("Playback failed:", err);
+            setIsPlaying(false); // Optionally handle error, e.g., due to autoplay policy
+          }
+        } else {
+          audio.pause();
+        }
+      }
     };
-  }, [audio]);
 
-  const navigateToHome = () => {
-    router.push("/"); // Correct use of router.push to navigate to the home route
-  };
+    togglePlayback();
 
-  useEffect(() => {
-    isPlaying ? audio.play() : audio.pause();
+    // Cleanup function to pause and reset audio on component unmount
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    };
   }, [isPlaying, audio]);
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
+  };
+
+  const navigateToHome = () => {
+    router.push("/");
   };
 
   return (
@@ -45,9 +61,9 @@ export default function Heart() {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center", // Keeps content vertically centered
-        alignItems: "center", // Aligns content container to center
-        textAlign: "center", // Aligns button text to center, not the paragraphs
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
       }}
     >
       <div
@@ -90,7 +106,7 @@ export default function Heart() {
           {/* Aligns text to left */}
           <p>1, 2, 3, 4</p>
           <p>Woke up in a new city</p>
-          <p>But you weren't there for me</p>
+          <p>But you weren&apos;t there for me</p>
           <p>Ran across the bridges</p>
           <p>To find out you were gone...</p>
         </div>

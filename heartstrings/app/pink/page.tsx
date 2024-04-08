@@ -3,39 +3,55 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Heart() {
-  const router = useRouter(); // Initialize the useRouter hook
+  const router = useRouter();
 
+  // Initialize audio state with undefined and set it in useEffect
+  const [audio, setAudio] = useState<HTMLAudioElement | undefined>(undefined);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [audio] = useState(() => {
+
+  // UseEffect for initializing the audio object
+  useEffect(() => {
     if (typeof Audio !== "undefined") {
-    const newAudio = new Audio("/timemachine-loop.wav");
-    newAudio.loop = true; // Set audio to loop
-    return newAudio;
+      const newAudio = new Audio("/timemachine-loop.wav");
+      newAudio.loop = true;
+      setAudio(newAudio);
     }
-    return undefined;
-  });
+  }, []);
 
+  // Handle automatic play/pause based on isPlaying state
   useEffect(() => {
-    // This function is called when the component mounts
-    // Start playing music automatically if needed or perform other initialization tasks
-
-    return () => {
-      audio.pause(); // Stop the music
-      audio.currentTime = 0; // Reset the play time to the start
-      setIsPlaying(false); // Reset play state
+    const togglePlayback = async () => {
+      if (audio) {
+        if (isPlaying) {
+          try {
+            await audio.play();
+          } catch (err) {
+            console.error("Playback failed:", err);
+            setIsPlaying(false); // Optionally handle the error, such as updating UI
+          }
+        } else {
+          audio.pause();
+        }
+      }
     };
-  }, [audio]);
 
-  const navigateToHome = () => {
-    router.push("/"); // Correct use of router.push to navigate to the home route
-  };
+    togglePlayback();
 
-  useEffect(() => {
-    isPlaying ? audio.play() : audio.pause();
+    // Cleanup function to pause and reset the audio when the component unmounts
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    };
   }, [isPlaying, audio]);
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
+  };
+
+  const navigateToHome = () => {
+    router.push("/");
   };
 
   return (
@@ -45,9 +61,9 @@ export default function Heart() {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center", // Keeps content vertically centered
-        alignItems: "center", // Aligns content container to center
-        textAlign: "center", // Aligns button text to center, not the paragraphs
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
       }}
     >
       <div
@@ -89,7 +105,7 @@ export default function Heart() {
           {" "}
           {/* Aligns text to left */}
           <p>Down the road</p>
-          <p>We're still the same</p>
+          <p>We&apos;re still the same</p>
           <p>As we were at</p>
           <p>Seventeen...</p>
         </div>

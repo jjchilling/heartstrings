@@ -77,7 +77,6 @@ const Music = () => {
         ></div>
       ))}
       <Navbar />
-      
       <div className="flex flex-col items-center justify-center">
         <div className="text-center">
           <h1 className="text-white text-5xl font-bold mt-4 md:mt-8 font-serif">
@@ -91,7 +90,8 @@ const Music = () => {
         <div className="flex flex-col lg:flex-row">
           <div className="p-2 space-y-1">
             <h2 className="text-2xl text-center font-serif">
-              Hi. I'm Heesu, and I am an independent artist based in Providence.
+              Hi. I&apos;m Heesu, and I am an independent artist based in
+              Providence.
             </h2>
             <h2 className="text-2xl font-serif">
               Single Time Machine will be released on April 28th, with album
