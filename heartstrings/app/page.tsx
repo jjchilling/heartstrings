@@ -96,12 +96,13 @@ export default function Home() {
   }, [nameIndex, name]);
 
   // Example function to navigate to the /about page
-  const navigateToMusic = () => {
-    router.push("/music"); // Use router.push to navigate
+
+  const navigateToAbout = () => {
+    router.push("/about"); // Use router.push to navigate
   };
 
-  const navigateToAbout= () => {
-    router.push("/about"); // Use router.push to navigate
+  const navigateToMusic = () => {
+    router.push("/music"); // Use router.push to navigate
   };
 
   const navigateToHeart = () => {
@@ -160,16 +161,16 @@ export default function Home() {
           <Release
             imageUrl="/heartstrings-title.png"
             imageAlt="HeartStrings"
-            buttonText="Pre-save"
-            buttonLink="https://youtu.be/MRcFSgx2W7s?si=vsuTDFytNW5WFKh6"
+            buttonText="Coming Soon"
+            buttonLink="https://linktr.ee/JulieChung"
             onImageClick={navigateToHeart}
           ></Release>
 
           <Release
             imageUrl="/time-machine.jpg"
             imageAlt="Time Machine"
-            buttonText="Pre-save"
-            buttonLink="https://youtu.be/MRcFSgx2W7s?si=vsuTDFytNW5WFKh6"
+            buttonText="Coming Soon"
+            buttonLink="https://linktr.ee/JulieChung"
             onImageClick={navigateToPink}
           ></Release>
 

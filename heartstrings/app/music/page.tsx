@@ -71,8 +71,8 @@ const router = useRouter(); // Now correctly imported
             <Release
               imageUrl="/time-machine.jpg"
               imageAlt="Time Machine"
-              buttonText="Listen"
-              buttonLink="https://youtu.be/MRcFSgx2W7s?si=vsuTDFytNW5WFKh6"
+              buttonText="Coming Soon"
+              buttonLink="https://linktr.ee/JulieChung"
             />
           </div>
         </div>

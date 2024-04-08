@@ -25,6 +25,7 @@ export default function Release({ imageUrl, imageAlt, buttonText, buttonLink, on
                 width={500}
                 height={300}
                 layout="intrinsic"
+                
               />
             </div>
           </div>
